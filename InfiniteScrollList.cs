@@ -25,7 +25,7 @@ public class InfiniteScrollList : MonoBehaviour
     private float touchPos;
     private float touchTime;
     private float touchSpeed;
-    private int currentIndex;
+    private int selectedIndex;
     [HideInInspector]
     public List<string> List;
 
@@ -33,14 +33,14 @@ public class InfiniteScrollList : MonoBehaviour
     {
         set{ selectedIndexChangedEvent = value; }
     }
-    public int CurrentIndex
+    public int SelectedIndex
     {
         get { return GetIndex(drawPosition); }
         set
         {
             if (List == null || value < 0 || value >= List.Count) return;
             DrawPosition = Screen.height * Mathf.Max(0, 1 - margin.bottom - margin.top) * (item.height + item.interval) * value;
-            CheckIfIndexChanged();
+            CheckIfSelectedIndexChanged();
         }
     }
 
@@ -100,7 +100,7 @@ public class InfiniteScrollList : MonoBehaviour
     void Start()
     {
         labelStyle = new GUIStyle();
-        currentIndex = -1;
+        selectedIndex = -1;
     }
 
     void OnGUI()
@@ -181,13 +181,13 @@ public class InfiniteScrollList : MonoBehaviour
         }
         return -1;
     }
-    private void CheckIfIndexChanged()
+    private void CheckIfSelectedIndexChanged()
     {
-        if (currentIndex != CurrentIndex) IndexChanged(CurrentIndex);
+        if (selectedIndex != SelectedIndex) SelectedIndexChange(SelectedIndex);
     }
-    private void IndexChanged(int index)
+    private void SelectedIndexChange(int index)
     {
-        currentIndex = index;
+        selectedIndex = index;
         if (index < 0) return;
         marqueePos = 0;
         selectedIndexChangedEvent?.Invoke(index);
@@ -282,7 +282,7 @@ public class InfiniteScrollList : MonoBehaviour
             if (touchSpeed < 0) touchSpeed = Mathf.Min(0, mouseSpeedTemp);
             else if (touchSpeed > 0) touchSpeed = Mathf.Max(0, mouseSpeedTemp);
         }
-        CheckIfIndexChanged();
+        CheckIfSelectedIndexChanged();
         marqueePos += labelStyle.fontSize * 2 * Time.deltaTime;
         if (marqueePos > marqueeEnd) marqueePos = 0;
     }
