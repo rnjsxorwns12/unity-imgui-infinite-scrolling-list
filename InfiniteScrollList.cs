@@ -6,8 +6,8 @@ using UnityEngine;
 public class InfiniteScrollList : MonoBehaviour
 {
     public static InfiniteScrollList Instance;
-    public delegate void IndexChangedEvent(int index);
-    private IndexChangedEvent indexChangedEvent;
+    public delegate void SelectedIndexChangedEvent(int index);
+    private SelectedIndexChangedEvent selectedIndexChangedEvent;
     [SerializeField, Range(0,1)]
     private float pivot = 0.5f;
     [SerializeField]
@@ -29,9 +29,9 @@ public class InfiniteScrollList : MonoBehaviour
     [HideInInspector]
     public List<string> List;
 
-    public IndexChangedEvent OnIndexChanged
+    public SelectedIndexChangedEvent SelectedIndexChanged
     {
-        set{ indexChangedEvent = value; }
+        set{ selectedIndexChangedEvent = value; }
     }
     public int CurrentIndex
     {
@@ -190,7 +190,7 @@ public class InfiniteScrollList : MonoBehaviour
         currentIndex = index;
         if (index < 0) return;
         marqueePos = 0;
-        indexChangedEvent?.Invoke(index);
+        selectedIndexChangedEvent?.Invoke(index);
     }
     private int touchId = -1;
     private bool Touch(Vector3 pos)
