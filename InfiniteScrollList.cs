@@ -108,7 +108,6 @@ public class InfiniteScrollList : MonoBehaviour
         );
         if (bg.width == 0 || bg.height == 0) return;
         if (background != null) GUI.DrawTexture(bg, background);
-        GUI.BeginGroup(bg);
         Rect rect = new Rect(
             bg.width * padding.left,
             bg.height * padding.top,
@@ -116,6 +115,7 @@ public class InfiniteScrollList : MonoBehaviour
             bg.height * Mathf.Max(0, 1 - padding.bottom - padding.top)
         );
         if (rect.width == 0 || rect.height == 0) return;
+        GUI.BeginGroup(bg);
         GUI.BeginGroup(rect);
         float itemHeight = bg.height * item.height;
         float itemTotalHeight = itemHeight + bg.height * item.interval;
