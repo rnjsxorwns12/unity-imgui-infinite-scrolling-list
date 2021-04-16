@@ -21,6 +21,21 @@ public class ExampleClass : MonoBehaviour
     }
 }
 ```
+### InfiniteScrollList.Instance.SelectedIndex
+```
+Gets and sets the selected index.
+A value of negative one (-1) is returned if the list is empty.
+```
+```C#
+using UnityEngine;
+public class ExampleClass : MonoBehaviour
+{
+    void Start()
+    {
+        Debug.Log(InfiniteScrollList.Instance.SelectedIndex);
+    }
+}
+```
 ### InfiniteScrollList.Instance.SelectedIndexChanged
 ```Your code is triggered when the selected Index has been changed.```
 ```C#
@@ -35,21 +50,6 @@ public class ExampleClass : MonoBehaviour
     void SelectedIndexChanged(int index)
     {
         //Your code
-    }
-}
-```
-### InfiniteScrollList.Instance.SelectedIndex
-```
-Gets and sets the selected index.
-A value of negative one (-1) is returned if the list is empty.
-```
-```C#
-using UnityEngine;
-public class ExampleClass : MonoBehaviour
-{
-    void Start()
-    {
-        Debug.Log(InfiniteScrollList.Instance.SelectedIndex);
     }
 }
 ```
