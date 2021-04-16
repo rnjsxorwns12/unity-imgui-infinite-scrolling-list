@@ -5,27 +5,63 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class InfiniteScrollList : MonoBehaviour
 {
+    [Serializable]
+    public class Position
+    {
+        [Range(0, 1)]
+        public float left;
+        [Range(0, 1)]
+        public float right;
+        [Range(0, 1)]
+        public float top;
+        [Range(0, 1)]
+        public float bottom;
+        public Position(float left, float right, float top, float bottom)
+        {
+            this.left = left;
+            this.right = right;
+            this.top = top;
+            this.bottom = bottom;
+        }
+        public Position() : this(0, 0, 0, 0) { }
+    }
+    [Serializable]
+    public class Item
+    {
+        [Range(0.01f, 1)]
+        public float height = 0.1f;
+        [Range(0, 1)]
+        public float interval = 0.01f;
+        public Texture backgroundNormal;
+        public Texture backgroundSelected;
+        public Position padding = new Position();
+        public TextAnchor textAnchor = TextAnchor.MiddleCenter;
+        public Font font;
+        public FontStyle fontStyle = FontStyle.Normal;
+        public Color fontColorNormal = Color.gray;
+        public Color fontColorSelected = Color.white;
+    }
     public static InfiniteScrollList Instance;
     public delegate void SelectedIndexChangedEvent(int index);
     private SelectedIndexChangedEvent selectedIndexChangedEvent;
     [SerializeField, Range(0,1)]
     private float pivot = 0.5f;
     [SerializeField]
-    private Item.Position margin;
+    private Position margin = new Position();
     [SerializeField]
-    private Item.Position padding;
+    private Position padding = new Position();
     [SerializeField]
     private Texture background;
     [SerializeField]
-    private Item item;
-    private GUIStyle labelStyle;
+    private Item item = new Item();
+    private GUIStyle labelStyle = new GUIStyle();
     private float drawPosition;
     private float marqueeEnd;
     private float marqueePos;
     private float touchPos;
     private float touchTime;
     private float touchSpeed;
-    private int selectedIndex;
+    private int selectedIndex = -1;
     [HideInInspector]
     public List<string> List;
 
@@ -57,50 +93,9 @@ public class InfiniteScrollList : MonoBehaviour
         }
     }
 
-    [Serializable]
-    public class Item
-    {
-        [Range(0, 1)]
-        public float height = 0.1f;
-        [Range(0, 1)]
-        public float interval = 0.01f;
-        public Texture backgroundNormal;
-        public Texture backgroundSelected;
-        public Position padding;
-        public TextAnchor textAnchor = TextAnchor.MiddleLeft;
-        public Font font;
-        public FontStyle fontStyle = FontStyle.Normal;
-        public Color fontColorNormal = Color.gray;
-        public Color fontColorSelected = Color.white;
-        [Serializable]
-        public class Position
-        {
-            [Range(0, 1)]
-            public float left;
-            [Range(0, 1)]
-            public float right;
-            [Range(0, 1)]
-            public float top;
-            [Range(0, 1)]
-            public float bottom;
-            public Position(float left, float right, float top, float bottom){
-                this.left = left;
-                this.right = right;
-                this.top = top;
-                this.bottom = bottom;
-            }
-        }
-    }
-
     private void Awake()
     {
         Instance = this;
-    }
-
-    void Start()
-    {
-        labelStyle = new GUIStyle();
-        selectedIndex = -1;
     }
 
     void OnGUI()
