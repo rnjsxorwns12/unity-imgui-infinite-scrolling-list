@@ -37,7 +37,9 @@ public class ExampleClass : MonoBehaviour
 }
 ```
 ### InfiniteScrollList.Instance.SelectedIndexChanged
-```Your code is triggered when the selected Index has been changed.```
+```
+Your code is triggered when the selected Index has been changed.
+```
 ```C#
 using UnityEngine;
 public class ExampleClass : MonoBehaviour
