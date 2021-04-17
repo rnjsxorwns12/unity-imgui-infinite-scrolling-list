@@ -6,7 +6,7 @@ using UnityEngine;
 public class InfiniteScrollList : MonoBehaviour
 {
     [Serializable]
-    public class Position
+    class Position
     {
         [Range(0, 1)]
         public float left;
@@ -26,7 +26,7 @@ public class InfiniteScrollList : MonoBehaviour
         public Position() : this(0, 0, 0, 0) { }
     }
     [Serializable]
-    public class Item
+    class Item
     {
         [Range(0.01f, 1)]
         public float height = 0.1f;
@@ -198,7 +198,7 @@ public class InfiniteScrollList : MonoBehaviour
     }
     private void Update()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || !(UNITY_ANDROID || UNITY_IOS)
         if (Input.GetMouseButtonDown(0) && Touch(Input.mousePosition))
         {
             touchTime = Time.deltaTime;
@@ -232,7 +232,7 @@ public class InfiniteScrollList : MonoBehaviour
                 touchId = -1;
             }
         }
-#elif UNITY_ANDROID || UNITY_IOS
+#else
         foreach (Touch t in Input.touches)
         {
             if (t.phase == TouchPhase.Began && Touch(t.position))
