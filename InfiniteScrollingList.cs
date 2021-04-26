@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 [ExecuteInEditMode]
-public class InfiniteScrollList : MonoBehaviour
+public class InfiniteScrollingList : MonoBehaviour
 {
     [Serializable]
     class Position
@@ -41,7 +41,7 @@ public class InfiniteScrollList : MonoBehaviour
         public Color fontColorNormal = Color.gray;
         public Color fontColorSelected = Color.white;
     }
-    public static InfiniteScrollList Instance;
+    public static InfiniteScrollingList Instance;
     public delegate void SelectedIndexChangedEvent(int index);
     private SelectedIndexChangedEvent selectedIndexChangedEvent;
     [SerializeField, Range(0,1)]
