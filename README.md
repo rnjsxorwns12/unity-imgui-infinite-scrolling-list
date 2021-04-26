@@ -1,11 +1,11 @@
-# Unity Infinite Scroll List
+# Unity Infinite Scrolling List
 
 ## How to use
 1. Copy the files into your existing unity project asset folder
-2. Attach ```InfiniteScrollList.cs``` script to your any object
-3. Then you can now access ```InfiniteScrollList.Instance``` from another script.
+2. Attach ```InfiniteScrollingList.cs``` script to your any object
+3. Then you can now access ```InfiniteScrollingList.Instance``` from another script.
 
-### InfiniteScrollList.Instance.List
+### InfiniteScrollingList.Instance.List
 ```Gets and sets a list.```
 ```C#
 using UnityEngine;
@@ -14,14 +14,14 @@ public class ExampleClass : MonoBehaviour
 {
     void Start()
     {
-        InfiniteScrollList.Instance.List = new List<string>();
-        InfiniteScrollList.Instance.List.Add("Example 1");
-        InfiniteScrollList.Instance.List.Add("Example 2");
-        InfiniteScrollList.Instance.List.Add("Example 3");
+        InfiniteScrollingList.Instance.List = new List<string>();
+        InfiniteScrollingList.Instance.List.Add("Example 1");
+        InfiniteScrollingList.Instance.List.Add("Example 2");
+        InfiniteScrollingList.Instance.List.Add("Example 3");
     }
 }
 ```
-### InfiniteScrollList.Instance.SelectedIndex
+### InfiniteScrollingList.Instance.SelectedIndex
 ```
 Gets and sets the selected index.
 A value of negative one (-1) is returned if the list is empty.
@@ -32,11 +32,11 @@ public class ExampleClass : MonoBehaviour
 {
     void Start()
     {
-        Debug.Log(InfiniteScrollList.Instance.SelectedIndex);
+        Debug.Log(InfiniteScrollingList.Instance.SelectedIndex);
     }
 }
 ```
-### InfiniteScrollList.Instance.SelectedIndexChanged
+### InfiniteScrollingList.Instance.SelectedIndexChanged
 ```
 Your code is triggered when the selected Index has been changed.
 ```
@@ -46,7 +46,7 @@ public class ExampleClass : MonoBehaviour
 {
     void Start()
     {
-        InfiniteScrollList.Instance.SelectedIndexChanged = SelectedIndexChanged;
+        InfiniteScrollingList.Instance.SelectedIndexChanged = SelectedIndexChanged;
     }
 
     void SelectedIndexChanged(int index)
