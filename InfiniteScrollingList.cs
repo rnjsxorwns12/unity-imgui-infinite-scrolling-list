@@ -1,4 +1,3 @@
-﻿//https://github.com/rnjsxorwns12/unity-infinite-scrolling-list
 using System;
 using System.Collections.Generic;
 using UnityEngine;
